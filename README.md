@@ -1,42 +1,36 @@
-# Stroke Prediction ML Project
+# Stroke Classification — Legacy Learning Project
 
-This repository contains a simple machine learning pipeline for predicting stroke occurrences from health records. The code loads a dataset, performs preprocessing, balances and splits the data and evaluates several classification models.
+An early machine learning exercise exploring preprocessing, class balancing, feature selection and comparison of traditional classifiers. Preserved as a record of my learning before the agent and retrieval systems featured on my [profile](https://github.com/quadrosema).
 
-## Project Structure
+**Status: archived legacy project.** This snapshot is not maintained as a runnable or validated application.
 
-```
-ML/
-├── data/                # Sample dataset
-└── src/                 # Source code for the ML pipeline
-    ├── main.py          # Entry point that runs the full workflow
-    ├── preprocess.py    # Data cleaning and encoding utilities
-    ├── read.py          # Dataset loading and exploratory helpers
-    ├── prepare.py       # Feature selection and train/test split
-    └── models.py        # Model training and evaluation
-```
+## Intended experiment
 
-## Installation
+The source explores:
 
-Ensure Python 3.8+ is installed. Install required packages:
+- Dataset inspection and class imbalance.
+- Missing-value handling, standardization and categorical encoding.
+- SMOTE oversampling.
+- Feature selection with Random Forest importance, SelectKBest and recursive elimination.
+- Logistic Regression, Random Forest, Gradient Boosting, XGBoost and LightGBM.
+- Classification reports and ROC visualizations.
 
-```bash
-pip install pandas seaborn matplotlib scikit-learn imbalanced-learn xgboost lightgbm
-```
+## Known limitations
 
-## Usage
+The current entry point has startup problems: its relative dataset path differs from the documented root invocation, and it assigns the return value of a preprocessing function that mutates the frame without returning it.
 
-From the repository root, run the pipeline:
+Standardization and SMOTE also occur before the train/test split in this snapshot. That allows information from the eventual test population to influence training preparation, so the resulting metrics should not be treated as an independent generalization estimate.
 
-```bash
-python -m src.main
-```
+A corrected experiment would split the original data first, fit learned preprocessing on training data only, oversample only the training partition and evaluate on an untouched test set. These corrections are not implemented in this archived snapshot.
 
-The script will output evaluation metrics for each model.
+## Repository map
 
-## Data
+| Path | Responsibility |
+| --- | --- |
+| `src/read.py` | Dataset inspection |
+| `src/preprocess.py` | Cleaning, encoding and scaling |
+| `src/prepare.py` | Balancing, splitting and feature selection |
+| `src/models.py` | Classifier comparison |
+| `src/main.py` | Original entry point |
 
-The `data/dataset.csv` file is a small sample dataset used for demonstrations. Replace it with your own data as needed.
-
-## License
-
-This project is provided for educational purposes.
+This is an educational classification exercise with no clinical validation. My current AI engineering work is presented in [Quadro](https://github.com/quadrosema/Quadro-AI-assistant), [AgentGuard](https://github.com/atrix187/AgentGuard) and the [Academic Intelligence Platform](https://github.com/quadrosema/academic-intelligence-platform).
